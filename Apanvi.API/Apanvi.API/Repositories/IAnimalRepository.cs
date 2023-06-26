@@ -4,6 +4,6 @@ namespace Apanvi.API.Repositories
 {
     public interface IAnimalRepository
     {
-        List<Animal> GetAll(Species? species, Size? size, Genre? genre);
+        List<Animal> GetAll(Species? species = null, Size? size = null, Genre? genre = null);
     }
 }

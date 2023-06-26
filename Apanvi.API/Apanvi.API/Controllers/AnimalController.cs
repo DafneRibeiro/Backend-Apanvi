@@ -14,7 +14,7 @@ namespace Apanvi.API.Controllers
             _animalRepository = animalRepository;
         }
         [HttpGet]
-        public IActionResult GetAnimals([FromQuery] Species? species, [FromQuery] Size? size, [FromQuery] Genre? genre) {
+        public IActionResult GetAnimals([FromQuery] Species? species = null, [FromQuery] Size? size = null, [FromQuery] Genre? genre = null) {
         
             var animals = _animalRepository.GetAll(species, size, genre);
             return Ok(animals);
