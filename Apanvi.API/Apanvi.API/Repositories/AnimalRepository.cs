@@ -11,7 +11,8 @@ namespace Apanvi.API.Repositories
         {
             _animalsDb.Add(new Animal
             {
-                Name = "name",
+                Id = 1,
+                Name = "Name1",
                 Description = "description",
                 Size = Size.Small,
                 Species = Species.Cat,
@@ -21,7 +22,8 @@ namespace Apanvi.API.Repositories
 
             _animalsDb.Add(new Animal
             {
-                Name = "name",
+                Id= 2,
+                Name = "Name2",
                 Description = "description",
                 Size = Size.Large,
                 Species = Species.Dog,
@@ -30,7 +32,8 @@ namespace Apanvi.API.Repositories
             });
             _animalsDb.Add(new Animal
             {
-                Name = "name",
+                Id= 3,
+                Name = "Name3",
                 Description = "description",
                 Size = Size.Medium,
                 Species = Species.Dog,
@@ -57,7 +60,16 @@ namespace Apanvi.API.Repositories
 
             return animals;
         }
-       
+
+        public List<Animal> GetByID(int id)
+        {
+            var animals = _animalsDb.ToList();
+            var animalById = animals.Where(animal => animal.Id == id).ToList();
+            return animalById;
+            
+        }
+
+
     }
     
 

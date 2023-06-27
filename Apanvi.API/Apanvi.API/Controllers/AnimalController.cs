@@ -19,5 +19,12 @@ namespace Apanvi.API.Controllers
             var animals = _animalRepository.GetAll(species, size, genre);
             return Ok(animals);
         }
+
+        [HttpGet("{Id:int}")]
+        public IActionResult GetAnimalById(int Id)
+        {
+            var animal = _animalRepository.GetByID(Id);
+            return Ok(animal);
+        }
     }
 }

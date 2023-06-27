@@ -83,6 +83,23 @@ namespace Apanvi.API.tests.Repositories
             animals.Should().BeEquivalentTo(animalsAllFilters);
         }
 
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void GetByID_WhenValidIdPassed_ThenReturnAnimalById(int Id)
+        {
+            // Arrange
+            var sut = new AnimalRepository();
+            // Act
+            var animal = sut.GetByID(Id);
+            // Assert
+            var animalsById = FilterId(Id);
+            
+            animal.Should().BeEquivalentTo(animalsById);
+        }
+
+
         private List<Animal> AllWithSpecies(Species species)
         {
             return AllAnimals().Where(animal => animal.Species == species).ToList();
@@ -102,13 +119,19 @@ namespace Apanvi.API.tests.Repositories
             return AllAnimals().Where(animal => animal.Genre == genre &&  animal.Species == species && animal.Size == size).ToList();
         }
 
+        private List<Animal> FilterId(int Id)
+        {
+            return AllAnimals().Where(animal => animal.Id == Id).ToList();
+        }
+
         private List<Animal> AllAnimals()
         {
             return new List<Animal>()
             {
                 new Animal
                 {
-                    Name = "name",
+                    Id = 1,
+                    Name = "Name1",
                     Description = "description",
                     Size = Size.Small,
                     Species = Species.Cat,
@@ -116,7 +139,8 @@ namespace Apanvi.API.tests.Repositories
                 },
                 new Animal
                 {
-                    Name = "name",
+                    Id = 2,
+                    Name = "Name2",
                     Description = "description",
                     Size = Size.Large,
                     Species = Species.Dog,
@@ -125,7 +149,8 @@ namespace Apanvi.API.tests.Repositories
 
                 new Animal
                 {
-                    Name = "name",
+                    Id = 3,
+                    Name = "Name3",
                     Description = "description",
                     Size = Size.Medium,
                     Species = Species.Dog,

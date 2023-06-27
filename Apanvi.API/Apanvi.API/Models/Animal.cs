@@ -4,6 +4,7 @@ namespace Apanvi.API.Models
 {
     public class Animal
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public Species Species { get; set; }
         public Size Size { get; set; }
