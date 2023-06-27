@@ -50,7 +50,7 @@ namespace Apanvi.API.Repositories
             {
                 animals = animals.Where(animal => animal.Size == size).ToList();
             }
-            if (size.HasValue)
+            if (genre.HasValue)
             {
                 animals = animals.Where(animal => animal.Genre == genre).ToList();
             }

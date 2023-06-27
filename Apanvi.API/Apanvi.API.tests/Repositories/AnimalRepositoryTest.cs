@@ -44,7 +44,7 @@ namespace Apanvi.API.tests.Repositories
             // Arrange
             var sut1 = new AnimalRepository();
             // Act
-            var animals = sut1.GetAll(Species.Dog, size);
+            var animals = sut1.GetAll(size: size);
             // Assert
             var animalsBySize = AllWithSize(size);
             animals.Should().BeEquivalentTo(animalsBySize);
@@ -67,6 +67,22 @@ namespace Apanvi.API.tests.Repositories
             animals.Should().HaveCount(animalsByGenre.Count);
         }
 
+        [Theory]
+        [InlineData(Species.Dog, Size.Small, Genre.Female)]
+        [InlineData(Species.Cat, Size.Medium, Genre.Male)]
+        [InlineData(Species.Dog, Size.Large, Genre.Male)]
+        public void GetAll_WhenMoreThanOneFilterApplied_ThenReturnFiltered(Species species, Size size, Genre genre)
+        {
+            // Arrange
+            var sut = new AnimalRepository();
+            // Act
+            var animals = sut.GetAll(species, size, genre);
+            // Assert
+            var animalsAllFilters = AllFilters(species, size, genre);
+            animals.Should().HaveCount(animalsAllFilters.Count);
+            animals.Should().BeEquivalentTo(animalsAllFilters);
+        }
+
         private List<Animal> AllWithSpecies(Species species)
         {
             return AllAnimals().Where(animal => animal.Species == species).ToList();
@@ -81,6 +97,10 @@ namespace Apanvi.API.tests.Repositories
             return AllAnimals().Where(animal => animal.Genre == genre).ToList();
         }
 
+        private List<Animal> AllFilters(Species species, Size size, Genre genre)
+        {
+            return AllAnimals().Where(animal => animal.Genre == genre &&  animal.Species == species && animal.Size == size).ToList();
+        }
 
         private List<Animal> AllAnimals()
         {
