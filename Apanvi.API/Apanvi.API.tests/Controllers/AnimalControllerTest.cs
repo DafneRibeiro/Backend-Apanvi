@@ -66,9 +66,6 @@ namespace Apanvi.API.tests.Controllers
             var animalResponse = okObjectResult.Value.Should().BeAssignableTo<List<Animal>>().Subject;
            
             animalResponse.Should().BeEquivalentTo(animalById);
-
-
-
         }
 
     }
