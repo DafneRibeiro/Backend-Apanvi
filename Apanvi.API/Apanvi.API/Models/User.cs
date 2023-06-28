@@ -1,12 +1,12 @@
 ﻿namespace Apanvi.API.Models
 {
-    public class User : Person // colocou q a classe user usa a classe Person como referencia
+    public class User : Person 
     {
         public String Roles { get; set; } 
         public bool CanEdit { get; set; }
         public bool CanDelete{ get; set; }
 
-        public User(string name, string roles) //construtor  passando name e lista 
+        public User(string name, string roles) 
         {
             Name = name;
             Roles = roles;

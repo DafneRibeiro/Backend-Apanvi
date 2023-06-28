@@ -7,7 +7,7 @@ namespace Apanvi.API.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-            private readonly IUserRepository _userRepository; // usa essa instancia da interface, entao usa com _
+            private readonly IUserRepository _userRepository; 
 
             public UserController(IUserRepository userRepository)
             {

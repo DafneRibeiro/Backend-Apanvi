@@ -9,7 +9,7 @@ namespace Apanvi.API.Repositories
 
         public UserRepository()
         {
-            _usersDb.Add(new User("Daiana", "SuperAdmin")); //user eh uma funcao q pede esses parametros entao temos q passar o parametro com valor direto, senao estariamos criando novos
+            _usersDb.Add(new User("Daiana", "SuperAdmin")); 
             _usersDb.Add(new User("Renata", "Admin"));
         }
         public List<User> GetAll()

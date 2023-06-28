@@ -6,7 +6,7 @@ namespace Apanvi.API.Repositories
 {
     public class AnimalRepository : IAnimalRepository
     {
-        private ConcurrentBag<Animal> _animalsDb = new ConcurrentBag<Animal>();        // é uma variavel mas concurrentBag e o "_" se usa qnd for usar algo da interface
+        private ConcurrentBag<Animal> _animalsDb = new ConcurrentBag<Animal>();        
                 public AnimalRepository()
         {
             _animalsDb.Add(new Animal
