@@ -68,17 +68,33 @@ namespace Apanvi.API.tests.Repositories
         }
 
         [Theory]
-        [InlineData(Species.Dog, Size.Small, Genre.Female)]
-        [InlineData(Species.Cat, Size.Medium, Genre.Male)]
-        [InlineData(Species.Dog, Size.Large, Genre.Male)]
-        public void GetAll_WhenMoreThanOneFilterApplied_ThenReturnFiltered(Species species, Size size, Genre genre)
+        [InlineData(Age.Puppy)]
+        [InlineData(Age.Adult)]
+        [InlineData(Age.Senior)]
+        public void GetAll_WhenFilteredByAge_ThenReturnFiltered(Age age)
         {
             // Arrange
             var sut = new AnimalRepository();
             // Act
-            var animals = sut.GetAll(species, size, genre);
+            var animals = sut.GetAll(age: age);
             // Assert
-            var animalsAllFilters = AllFilters(species, size, genre);
+            var animalsByAge = AllWithAge(age);
+            animals.Should().BeEquivalentTo(animalsByAge);
+            animals.Should().HaveCount(animalsByAge.Count);
+        }
+
+        [Theory]
+        [InlineData(Species.Dog, Size.Small,Age.Puppy, Genre.Female)]
+        [InlineData(Species.Cat, Size.Medium,Age.Adult, Genre.Male)]
+        [InlineData(Species.Dog, Size.Large,Age.Senior, Genre.Male)]
+        public void GetAll_WhenMoreThanOneFilterApplied_ThenReturnFiltered(Species species, Size size, Age age, Genre genre)
+        {
+            // Arrange
+            var sut = new AnimalRepository();
+            // Act
+            var animals = sut.GetAll(species, size, age, genre);
+            // Assert
+            var animalsAllFilters = AllFilters(species, size, age, genre);
             animals.Should().HaveCount(animalsAllFilters.Count);
             animals.Should().BeEquivalentTo(animalsAllFilters);
         }
@@ -100,6 +116,7 @@ namespace Apanvi.API.tests.Repositories
         }
 
 
+
         private List<Animal> AllWithSpecies(Species species)
         {
             return AllAnimals().Where(animal => animal.Species == species).ToList();
@@ -114,9 +131,14 @@ namespace Apanvi.API.tests.Repositories
             return AllAnimals().Where(animal => animal.Genre == genre).ToList();
         }
 
-        private List<Animal> AllFilters(Species species, Size size, Genre genre)
+        private List<Animal> AllWithAge(Age age)
         {
-            return AllAnimals().Where(animal => animal.Genre == genre &&  animal.Species == species && animal.Size == size).ToList();
+            return AllAnimals().Where(animal => animal.Age == age).ToList();
+        }
+
+        private List<Animal> AllFilters(Species species, Size size, Age age, Genre genre)
+        {
+            return AllAnimals().Where(animal => animal.Genre == genre &&  animal.Species == species && animal.Size == size && animal.Age == age).ToList();
         }
 
         private List<Animal> FilterId(int Id)
@@ -134,6 +156,7 @@ namespace Apanvi.API.tests.Repositories
                     Name = "Name1",
                     Description = "description",
                     Size = Size.Small,
+                    Age = Age.Puppy,
                     Species = Species.Cat,
                     Genre = Genre.Male,
                 },
@@ -143,6 +166,7 @@ namespace Apanvi.API.tests.Repositories
                     Name = "Name2",
                     Description = "description",
                     Size = Size.Large,
+                    Age = Age.Adult,
                     Species = Species.Dog,
                     Genre = Genre.Female,
                 },
@@ -153,6 +177,7 @@ namespace Apanvi.API.tests.Repositories
                     Name = "Name3",
                     Description = "description",
                     Size = Size.Medium,
+                    Age = Age.Senior,
                     Species = Species.Dog,
                     Genre = Genre.Female,
                 }

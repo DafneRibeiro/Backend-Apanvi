@@ -15,6 +15,7 @@ namespace Apanvi.API.Repositories
                 Name = "Name1",
                 Description = "description",
                 Size = Size.Small,
+                Age = Age.Puppy,
                 Species = Species.Cat,
                 Genre = Genre.Male,
                 
@@ -26,6 +27,7 @@ namespace Apanvi.API.Repositories
                 Name = "Name2",
                 Description = "description",
                 Size = Size.Large,
+                Age = Age.Adult,
                 Species = Species.Dog,
                 Genre = Genre.Female,
 
@@ -36,13 +38,14 @@ namespace Apanvi.API.Repositories
                 Name = "Name3",
                 Description = "description",
                 Size = Size.Medium,
+                Age = Age.Senior,
                 Species = Species.Dog,
                 Genre = Genre.Female,
 
             });
         }
 
-        public List<Animal> GetAll(Species? species = null, Size? size = null, Genre? genre = null)
+        public List<Animal> GetAll(Species? species = null, Size? size = null, Age? age = null, Genre? genre = null)
         {
             var animals = _animalsDb.ToList();
             if (species.HasValue)
@@ -56,6 +59,10 @@ namespace Apanvi.API.Repositories
             if (genre.HasValue)
             {
                 animals = animals.Where(animal => animal.Genre == genre).ToList();
+            }
+            if (age.HasValue)
+            {
+                animals = animals.Where(animal => animal.Age == age).ToList();
             }
 
             return animals;
