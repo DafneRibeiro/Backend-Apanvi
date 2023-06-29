@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers().AddJsonOptions(options => 
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())); 
-builder.Services.AddSingleton<IAnimalRepository, AnimalRepository>(); 
+builder.Services.AddSingleton<IAnimalRepository, AnimalRepository>();
+builder.Services.AddSingleton<IUserRepository, UserRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

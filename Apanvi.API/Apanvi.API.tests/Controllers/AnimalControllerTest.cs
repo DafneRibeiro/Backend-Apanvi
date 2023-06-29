@@ -35,7 +35,7 @@ namespace Apanvi.API.tests.Controllers
             var animalResponse = okObjectResult.Value.Should().BeAssignableTo<List<Animal>>().Subject;
             
             animalResponse.Should().BeSameAs(animals); 
-            repositoryMock.Verify(p => p.GetAll(It.IsAny<Species?>(), It.IsAny<Size?>(), It.IsAny<Genre?>()), Times.Once); // passamos o ? pq ela pode ser null
+            repositoryMock.Verify(p => p.GetAll(It.IsAny<Species?>(), It.IsAny<Size?>(), It.IsAny<Genre?>()), Times.Once); 
           
             repositoryMock.VerifyNoOtherCalls(); 
         }

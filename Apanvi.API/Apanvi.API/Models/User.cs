@@ -2,9 +2,9 @@
 {
     public class User : Person 
     {
-        public String Roles { get; set; } 
-        public bool CanEdit { get; set; }
-        public bool CanDelete{ get; set; }
+        public String Roles { get; set; }
+        public bool CanEdit { get; set; } = true;
+        public bool CanDelete { get; set; } = true;
 
         public User(string name, string roles) 
         {
