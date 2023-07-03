@@ -1,4 +1,5 @@
-﻿using Apanvi.API.Models;
+﻿using Apanvi.API.Context;
+using Apanvi.API.Models;
 using System.Collections.Concurrent;
 
 
@@ -6,6 +7,13 @@ namespace Apanvi.API.Repositories
 {
     public class AnimalRepository : IAnimalRepository
     {
+
+        private readonly ConnectionContext _context;
+
+        public AnimalRepository(ConnectionContext context)
+        {
+            _context = context;
+        }
         private ConcurrentBag<Animal> _animalsDb = new ConcurrentBag<Animal>();        
                 public AnimalRepository()
         {

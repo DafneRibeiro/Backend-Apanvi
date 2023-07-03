@@ -1,5 +1,8 @@
-﻿namespace Apanvi.API.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Apanvi.API.Models
 {
+    [Table("users")]
     public class User : Person 
     {
         public String Roles { get; set; }

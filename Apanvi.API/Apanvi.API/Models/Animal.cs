@@ -1,7 +1,8 @@
-﻿
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Apanvi.API.Models
 {
+    [Table("animal")]
     public class Animal
     {
         public int Id { get; set; }
