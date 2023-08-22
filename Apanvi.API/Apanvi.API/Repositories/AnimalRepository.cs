@@ -14,7 +14,7 @@ namespace Apanvi.API.Repositories
         {
             _context = context;
         }
-        private ConcurrentBag<Animal> _animalsDb = new ConcurrentBag<Animal>();        
+       /* private ConcurrentBag<Animal> _animalsDb = new ConcurrentBag<Animal>();        
                 public AnimalRepository()
         {
             _animalsDb.Add(new Animal
@@ -51,7 +51,7 @@ namespace Apanvi.API.Repositories
                 Genre = Genre.Female,
 
             });
-        }
+        }*/
 
         public List<Animal> GetAll(Species? species = null, Size? size = null, Age? age = null, Genre? genre = null)
         {
